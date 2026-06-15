@@ -1,0 +1,95 @@
+.ui-select {
+  position: relative;
+  width: 100%;
+  user-select: none;
+}
+
+.ui-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.93rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ui-select--open .ui-select-trigger,
+.ui-select-trigger:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+  outline: none;
+}
+
+.ui-select-placeholder { color: #94a3b8; flex: 1; }
+.ui-select-value        { color: var(--text); flex: 1; }
+
+.ui-select-chevron {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.ui-select--open .ui-select-chevron { transform: rotate(180deg); }
+
+/* Dropdown panel */
+.ui-select-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  list-style: none;
+  padding: 0.35rem;
+  max-height: 240px;
+  overflow-y: auto;
+  animation: uiSelectIn 0.14s ease;
+}
+
+@keyframes uiSelectIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ui-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ui-select-option:hover:not(.ui-select-option--active) { background: #f8fafc; }
+
+.ui-select-option--active { background: rgba(15, 118, 110, 0.07); }
+
+.ui-select-option-label {
+  font-size: 0.93rem;
+  color: var(--text);
+  flex: 1;
+}
+
+.ui-select-option--active .ui-select-option-label {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.ui-select-check {
+  font-size: 1rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}

@@ -1,0 +1,12 @@
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.badge-medico      { background: #dbeafe; color: #1d4ed8; }
+.badge-fisio       { background: #dcfce7; color: #15803d; }
+.badge-psico       { background: #fae8ff; color: #7e22ce; }
