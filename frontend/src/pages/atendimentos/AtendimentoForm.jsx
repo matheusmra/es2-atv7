@@ -56,7 +56,7 @@ export default function AtendimentoForm() {
           horario: a.horario ?? '',
           problemaTexto: a.problemaTexto ?? '',
           receitaSaude: a.receitaSaude ?? '',
-          profissionalId: a.profissional?.id ? String(a.profissional.id) : '',
+          profissionalId: a.profissionalId ? String(a.profissionalId) : '',
         })
       })
       .catch(() => setError('Atendimento não encontrado.'))

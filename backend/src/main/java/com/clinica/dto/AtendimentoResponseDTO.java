@@ -21,6 +21,7 @@ public class AtendimentoResponseDTO {
     private String receitaSaude;
     private Long profissionalId;
     private String profissionalNome;
+    private String profissionalCategoria;
     private List<ExameLabResponseDTO> exames;
 
     public AtendimentoResponseDTO(Atendimento entity) {
@@ -31,6 +32,7 @@ public class AtendimentoResponseDTO {
         this.receitaSaude = entity.getReceitaSaude();
         this.profissionalId = entity.getProfissional().getId();
         this.profissionalNome = entity.getProfissional().getNome();
+        this.profissionalCategoria = entity.getProfissional().getCategoria().name();
         this.exames = entity.getExames().stream()
                 .map(ExameLabResponseDTO::new)
                 .toList();

@@ -76,11 +76,11 @@ export default function AtendimentosList() {
                   <td className="id-col">{a.id}</td>
                   <td>{a.data}</td>
                   <td>{a.horario}</td>
-                  <td className="bold">{a.profissional?.nome ?? '—'}</td>
+                  <td className="bold">{a.profissionalNome ?? '—'}</td>
                   <td className="truncate">{a.problemaTexto}</td>
                   <td>
                     <span className="receita-label">
-                      {RECEITA_LABEL[a.profissional?.categoria] ?? 'Receita'}:
+                      {RECEITA_LABEL[a.profissionalCategoria] ?? 'Receita'}:
                     </span>{' '}
                     {a.receitaSaude}
                   </td>
