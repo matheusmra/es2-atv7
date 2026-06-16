@@ -91,6 +91,7 @@ export default function ProfissionalForm() {
                 icon="phone"
                 name="telefone"
                 type="tel"
+                maxLength={15}
                 pattern="^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"
                 title="Digite um telefone válido com DDD (Ex: (11) 98888-7777 ou 11988887777)"
                 value={form.telefone}
