@@ -14,8 +14,8 @@ services:
 
   app:
     build: ./backend
-    ports:
-      - "8080:8080"
+    # ports:
+    #  - "8080:8080" # Comentado para evitar conflito na VPS. O Dokploy fará o roteamento interno pelo domínio.
     depends_on:
       - db
     environment:
@@ -29,10 +29,9 @@ services:
     build: 
       context: ./frontend
       args:
-        # A URL do backend na VPS. Altere para o domínio real no Dokploy.
         VITE_API_URL: http://localhost:8080
-    ports:
-      - "3000:80"
+    # ports:
+    #  - "3000:80" # Comentado para evitar conflito na VPS. O Dokploy fará o roteamento interno pelo domínio.
     depends_on:
       - app
 
