@@ -35,6 +35,7 @@ export default function ProfissionaisList() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchNome, setSearchNome] = useState('')
+  const [searchId, setSearchId] = useState('')
   const [filterCategoria, setFilterCategoria] = useState('')
   const [deleteTarget, setDeleteTarget] = useState(null)
 
@@ -56,7 +57,12 @@ export default function ProfissionaisList() {
     try {
       setLoading(true)
       let res
-      if (filterCategoria) {
+      if (searchId.trim()) {
+        const { getProfissionalById } = await import('../../api/profissionais')
+        res = await getProfissionalById(searchId.trim())
+        setProfissionais(res.data ? [res.data] : [])
+        return
+      } else if (filterCategoria) {
         res = await getProfissionaisByCategoria(filterCategoria)
       } else if (searchNome.trim()) {
         res = await getProfissionaisByNome(searchNome.trim())
@@ -94,10 +100,16 @@ export default function ProfissionaisList() {
 
       <div className="filters">
         <Input
+          icon="tag"
+          placeholder="Buscar por ID..."
+          value={searchId}
+          onChange={(e) => { setSearchId(e.target.value); setSearchNome(''); setFilterCategoria('') }}
+        />
+        <Input
           icon="search"
           placeholder="Buscar por nome..."
           value={searchNome}
-          onChange={(e) => { setSearchNome(e.target.value); setFilterCategoria('') }}
+          onChange={(e) => { setSearchNome(e.target.value); setSearchId(''); setFilterCategoria('') }}
         />
         <Select
           value={filterCategoria}
@@ -108,7 +120,7 @@ export default function ProfissionaisList() {
           <span className="material-symbols-outlined">search</span>
           Buscar
         </Button>
-        <Button variant="ghost" onClick={() => { setSearchNome(''); setFilterCategoria(''); fetchAll() }}>
+        <Button variant="ghost" onClick={() => { setSearchNome(''); setSearchId(''); setFilterCategoria(''); fetchAll() }}>
           Limpar
         </Button>
       </div>

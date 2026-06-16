@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { getExames, deleteExame } from '../../api/exames'
 import Button from '../../components/ui/Button'
+import Input from '../../components/ui/Input'
 import ConfirmModal from '../../components/ConfirmModal'
 
 export default function ExamesList() {
   const [exames, setExames] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchId, setSearchId] = useState('')
   const [deleteTarget, setDeleteTarget] = useState(null)
 
   const fetchAll = async () => {
@@ -22,6 +24,24 @@ export default function ExamesList() {
   }
 
   useEffect(() => { fetchAll() }, [])
+
+  const handleSearch = async () => {
+    try {
+      setLoading(true)
+      if (searchId.trim()) {
+        const { getExameById } = await import('../../api/exames')
+        const res = await getExameById(searchId.trim())
+        setExames(res.data ? [res.data] : [])
+      } else {
+        const res = await getExames()
+        setExames(res.data)
+      }
+    } catch {
+      setError('Erro ao buscar exames.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleDelete = async () => {
     try {
@@ -41,6 +61,22 @@ export default function ExamesList() {
         <Button to="/exames/novo">
           <span className="material-symbols-outlined">add</span>
           Novo Exame
+        </Button>
+      </div>
+
+      <div className="filters">
+        <Input
+          icon="tag"
+          placeholder="Buscar por ID..."
+          value={searchId}
+          onChange={(e) => setSearchId(e.target.value)}
+        />
+        <Button variant="secondary" onClick={handleSearch}>
+          <span className="material-symbols-outlined">search</span>
+          Buscar
+        </Button>
+        <Button variant="ghost" onClick={() => { setSearchId(''); fetchAll() }}>
+          Limpar
         </Button>
       </div>
 

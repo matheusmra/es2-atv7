@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAtendimentos, deleteAtendimento } from '../../api/atendimentos'
 import Button from '../../components/ui/Button'
+import Input from '../../components/ui/Input'
 import ConfirmModal from '../../components/ConfirmModal'
 
 const RECEITA_LABEL = {
@@ -13,6 +14,7 @@ export default function AtendimentosList() {
   const [atendimentos, setAtendimentos] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchId, setSearchId] = useState('')
   const [deleteTarget, setDeleteTarget] = useState(null)
 
   const fetchAll = async () => {
@@ -28,6 +30,24 @@ export default function AtendimentosList() {
   }
 
   useEffect(() => { fetchAll() }, [])
+
+  const handleSearch = async () => {
+    try {
+      setLoading(true)
+      if (searchId.trim()) {
+        const { getAtendimentoById } = await import('../../api/atendimentos')
+        const res = await getAtendimentoById(searchId.trim())
+        setAtendimentos(res.data ? [res.data] : [])
+      } else {
+        const res = await getAtendimentos()
+        setAtendimentos(res.data)
+      }
+    } catch {
+      setError('Erro ao buscar atendimentos.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleDelete = async () => {
     try {
@@ -47,6 +67,22 @@ export default function AtendimentosList() {
         <Button to="/atendimentos/novo">
           <span className="material-symbols-outlined">add</span>
           Novo Atendimento
+        </Button>
+      </div>
+
+      <div className="filters">
+        <Input
+          icon="tag"
+          placeholder="Buscar por ID..."
+          value={searchId}
+          onChange={(e) => setSearchId(e.target.value)}
+        />
+        <Button variant="secondary" onClick={handleSearch}>
+          <span className="material-symbols-outlined">search</span>
+          Buscar
+        </Button>
+        <Button variant="ghost" onClick={() => { setSearchId(''); fetchAll() }}>
+          Limpar
         </Button>
       </div>
 
