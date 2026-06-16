@@ -75,7 +75,7 @@ export default function AtendimentoForm() {
       horario: form.horario,
       problemaTexto: form.problemaTexto,
       receitaSaude: form.receitaSaude,
-      profissional: { id: Number(form.profissionalId) },
+      profissionalId: Number(form.profissionalId),
     }
     try {
       setLoading(true)
