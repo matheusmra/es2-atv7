@@ -1,4 +1,4 @@
-# Clínica Multidisciplinar — es2-atv7
+# Clínica Multidisciplinar
 
 Aplicação de gestão para clínica de saúde multidisciplinar desenvolvida como atividade da disciplina de Engenharia de Software 2.
 
