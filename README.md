@@ -110,4 +110,4 @@ Projeto desenvolvido de forma colaborativa para a disciplina de Engenharia de So
 | Aluno | Papel / Responsabilidades |
 | :--- | :--- |
 | **Arthur Carvalho Rodrigues** | **Desenvolvimento Backend**<br/>Testes Unitários, Arquitetura, Lógica de Negócios (Java/Spring) e Containerização (Docker) |
-| **Matheus de Almeida Moreira** | **Desenvolvimento Frontend**<br/>Infraestrutura, CI/CD e Deploy na VPS |
+| **Matheus de Almeida Moreira** | **Desenvolvimento Fullstack (Frontend + Backend)**<br/>Infraestrutura, CI/CD e Deploy na VPS |
