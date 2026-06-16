@@ -83,10 +83,13 @@ export default function ExameForm() {
           <Input
             icon="science"
             name="descricao"
+            type="text"
+            minLength={5}
+            maxLength={200}
             value={form.descricao}
             onChange={handleChange}
             required
-            placeholder="Ex: Hemograma completo"
+            placeholder="Ex: Hemograma completo (mín. 5 caracteres)"
           />
         </div>
 

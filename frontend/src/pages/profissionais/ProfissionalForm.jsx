@@ -74,6 +74,9 @@ export default function ProfissionalForm() {
             <Input
               icon="person"
               name="nome"
+              type="text"
+              minLength={3}
+              maxLength={100}
               value={form.nome}
               onChange={handleChange}
               required
@@ -87,6 +90,9 @@ export default function ProfissionalForm() {
               <Input
                 icon="phone"
                 name="telefone"
+                type="tel"
+                pattern="^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"
+                title="Digite um telefone válido com DDD (Ex: (11) 98888-7777 ou 11988887777)"
                 value={form.telefone}
                 onChange={handleChange}
                 required
@@ -109,6 +115,9 @@ export default function ProfissionalForm() {
             <Input
               icon="location_on"
               name="endereco"
+              type="text"
+              minLength={5}
+              maxLength={200}
               value={form.endereco}
               onChange={handleChange}
               required

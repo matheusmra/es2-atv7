@@ -141,11 +141,13 @@ export default function AtendimentoForm() {
           <label className="form-label">Problema Relatado</label>
           <Textarea
             name="problemaTexto"
+            minLength={10}
+            maxLength={1000}
             value={form.problemaTexto}
             onChange={handleChange}
             required
             rows={3}
-            placeholder="Descreva o problema do paciente..."
+            placeholder="Descreva o problema do paciente... (mín. 10 caracteres)"
           />
         </div>
 
@@ -153,11 +155,13 @@ export default function AtendimentoForm() {
           <label className="form-label">{receitaLabel}</label>
           <Textarea
             name="receitaSaude"
+            minLength={5}
+            maxLength={2000}
             value={form.receitaSaude}
             onChange={handleChange}
             required
             rows={3}
-            placeholder={`Preencha a ${receitaLabel.toLowerCase()}...`}
+            placeholder={`Preencha a ${receitaLabel.toLowerCase()}... (mín. 5 caracteres)`}
           />
         </div>
 
