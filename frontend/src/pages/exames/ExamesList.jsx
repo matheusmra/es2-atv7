@@ -66,7 +66,7 @@ export default function ExamesList() {
                 <tr key={e.id}>
                   <td className="id-col">{e.id}</td>
                   <td>{e.descricao}</td>
-                  <td>{e.atendimento?.id ? `#${e.atendimento.id}` : '—'}</td>
+                  <td>{e.atendimentoId ? `#${e.atendimentoId}` : '—'}</td>
                   <td>
                     <div className="action-btns">
                       <Button to={`/exames/${e.id}/editar`} variant="secondary" size="sm">

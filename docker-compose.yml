@@ -25,5 +25,16 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
 
+  frontend:
+    build: 
+      context: ./frontend
+      args:
+        # A URL do backend na VPS. Altere para o domínio real no Dokploy.
+        VITE_API_URL: http://localhost:8080
+    ports:
+      - "3000:80"
+    depends_on:
+      - app
+
 volumes:
   pgdata:

@@ -22,7 +22,7 @@ export default function ExameForm() {
     { value: '', label: 'Nenhum' },
     ...atendimentos.map((a) => ({
       value: String(a.id),
-      label: `#${a.id} — ${a.data} ${a.horario} (${a.profissional?.nome ?? '?'})`,
+      label: `#${a.id} — ${a.data} ${a.horario} (${a.profissionalNome ?? '?'})`,
     })),
   ]
 
@@ -36,7 +36,7 @@ export default function ExameForm() {
         const ex = res.data
         setForm({
           descricao: ex.descricao ?? '',
-          atendimentoId: ex.atendimento?.id ? String(ex.atendimento.id) : '',
+          atendimentoId: ex.atendimentoId ? String(ex.atendimentoId) : '',
         })
       })
       .catch(() => setError('Exame não encontrado.'))
@@ -52,7 +52,7 @@ export default function ExameForm() {
     setError(null)
     const payload = {
       descricao: form.descricao,
-      atendimento: form.atendimentoId ? { id: Number(form.atendimentoId) } : null,
+      atendimentoId: form.atendimentoId ? Number(form.atendimentoId) : null,
     }
     try {
       setLoading(true)
