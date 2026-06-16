@@ -44,7 +44,6 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    plan: free
     envVars:
       # Injeta o host público do backend
       - key: VITE_API_URL
