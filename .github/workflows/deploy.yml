@@ -16,7 +16,8 @@ jobs:
             exit 1
           fi
           echo "Triggering VPS deployment..."
-          curl -sS -L -X POST "${{ secrets.VPS_WEBHOOK_URL }}" \
+          curl -sS -L -X POST "${{ secrets.VPS_WEBHOOK_URL }}?branch=main" \
             -H "Content-Type: application/json" \
-            -d "{\"ref\": \"refs/heads/main\"}"
+            -d "{\"branch\": \"main\", \"ref\": \"refs/heads/main\"}"
+          echo ""
           echo "Deployment triggered successfully!"
