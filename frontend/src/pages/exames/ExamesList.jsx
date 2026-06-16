@@ -28,10 +28,16 @@ export default function ExamesList() {
   const handleSearch = async () => {
     try {
       setLoading(true)
+      setError(null)
       if (searchId.trim()) {
         const { getExameById } = await import('../../api/exames')
-        const res = await getExameById(searchId.trim())
-        setExames(res.data ? [res.data] : [])
+        try {
+          const res = await getExameById(searchId.trim())
+          setExames(res.data ? [res.data] : [])
+        } catch (err) {
+          if (err.response?.status === 404) setExames([])
+          else throw err
+        }
       } else {
         const res = await getExames()
         setExames(res.data)

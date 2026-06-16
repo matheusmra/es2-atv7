@@ -56,11 +56,17 @@ export default function ProfissionaisList() {
   const handleSearch = async () => {
     try {
       setLoading(true)
+      setError(null)
       let res
       if (searchId.trim()) {
         const { getProfissionalById } = await import('../../api/profissionais')
-        res = await getProfissionalById(searchId.trim())
-        setProfissionais(res.data ? [res.data] : [])
+        try {
+          res = await getProfissionalById(searchId.trim())
+          setProfissionais(res.data ? [res.data] : [])
+        } catch (err) {
+          if (err.response?.status === 404) setProfissionais([])
+          else throw err
+        }
         return
       } else if (filterCategoria) {
         res = await getProfissionaisByCategoria(filterCategoria)

@@ -15,6 +15,7 @@ export default function AtendimentosList() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchId, setSearchId] = useState('')
+  const [searchNome, setSearchNome] = useState('')
   const [deleteTarget, setDeleteTarget] = useState(null)
 
   const fetchAll = async () => {
@@ -34,13 +35,24 @@ export default function AtendimentosList() {
   const handleSearch = async () => {
     try {
       setLoading(true)
+      setError(null)
       if (searchId.trim()) {
         const { getAtendimentoById } = await import('../../api/atendimentos')
-        const res = await getAtendimentoById(searchId.trim())
-        setAtendimentos(res.data ? [res.data] : [])
+        try {
+          const res = await getAtendimentoById(searchId.trim())
+          setAtendimentos(res.data ? [res.data] : [])
+        } catch (err) {
+          if (err.response?.status === 404) setAtendimentos([])
+          else throw err
+        }
       } else {
         const res = await getAtendimentos()
-        setAtendimentos(res.data)
+        let data = res.data
+        if (searchNome.trim()) {
+          const term = searchNome.toLowerCase()
+          data = data.filter(a => a.profissionalNome?.toLowerCase().includes(term))
+        }
+        setAtendimentos(data)
       }
     } catch {
       setError('Erro ao buscar atendimentos.')
@@ -75,13 +87,19 @@ export default function AtendimentosList() {
           icon="tag"
           placeholder="Buscar por ID..."
           value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
+          onChange={(e) => { setSearchId(e.target.value); setSearchNome('') }}
+        />
+        <Input
+          icon="search"
+          placeholder="Buscar por nome do profissional..."
+          value={searchNome}
+          onChange={(e) => { setSearchNome(e.target.value); setSearchId('') }}
         />
         <Button variant="secondary" onClick={handleSearch}>
           <span className="material-symbols-outlined">search</span>
           Buscar
         </Button>
-        <Button variant="ghost" onClick={() => { setSearchId(''); fetchAll() }}>
+        <Button variant="ghost" onClick={() => { setSearchId(''); setSearchNome(''); fetchAll() }}>
           Limpar
         </Button>
       </div>
