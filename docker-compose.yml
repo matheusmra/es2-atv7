@@ -29,7 +29,7 @@ services:
     build: 
       context: ./frontend
       args:
-        VITE_API_URL: http://localhost:8080
+        VITE_API_URL: ${VITE_API_URL}
     # ports:
     #  - "3000:80" # Comentado para evitar conflito na VPS. O Dokploy fará o roteamento interno pelo domínio.
     depends_on:
